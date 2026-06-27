@@ -95,10 +95,26 @@ public fun FlowPreferenceRepository.asFunction(
     return state::value
 }
 
+@JvmName("asIntFlow")
+public fun FlowPreferenceRepository.asFlow(
+    preference: Preference.Default<Int>,
+): StateFlow<Int> {
+    val state = asViewModelState(preference)
+    return state.stateFlow
+}
+
 @JvmName("asIntFunction")
 public fun FlowPreferenceRepository.asFunction(preference: Preference.Default<Int>): () -> Int {
     val state = asViewModelState(preference)
     return state::value
+}
+
+@JvmName("asLongFlow")
+public fun FlowPreferenceRepository.asFlow(
+    preference: Preference.Default<Long>,
+): StateFlow<Long> {
+    val state = asViewModelState(preference)
+    return state.stateFlow
 }
 
 @JvmName("asLongFunction")
@@ -107,10 +123,25 @@ public fun FlowPreferenceRepository.asFunction(preference: Preference.Default<Lo
     return state::value
 }
 
+@JvmName("asStringFlow")
+public fun FlowPreferenceRepository.asFlow(
+    preference: Preference.Nullable<String>,
+): StateFlow<String?> {
+    val state = asViewModelState(preference)
+    return state.stateFlow
+}
 @JvmName("asStringFunction")
 public fun FlowPreferenceRepository.asFunction(preference: Preference.Nullable<String>): () -> String? {
     val state = asViewModelState(preference)
     return state::value
+}
+
+@JvmName("asMappedStringFlow")
+public fun <T : Any> FlowPreferenceRepository.asFlow(
+    preference: Preference.Mapped<T, String>,
+): StateFlow<T> {
+    val state = asViewModelState(preference)
+    return state.stateFlow
 }
 
 @JvmName("asMappedStringFunction")

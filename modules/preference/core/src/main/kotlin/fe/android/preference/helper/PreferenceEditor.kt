@@ -76,7 +76,7 @@ public sealed class PreferenceEditor {
     }
 
     @OptIn(UnsafePreferenceInteraction::class)
-    public fun unsafePut(
+    protected fun unsafePut(
         preference: Preference<*, *>,
         value: Any?
     ): Boolean {
