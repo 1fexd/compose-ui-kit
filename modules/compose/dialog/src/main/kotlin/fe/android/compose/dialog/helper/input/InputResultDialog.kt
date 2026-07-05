@@ -27,7 +27,9 @@ public fun <I : Any, R : Any> InputResultDialog(
     }
 
     if (state.isOpen) {
-        wasEverOpen = true
+        LaunchedEffect(Unit) {
+            wasEverOpen = true
+        }
         content(state.data)
     }
 }
