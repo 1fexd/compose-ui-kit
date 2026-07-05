@@ -3,6 +3,7 @@ package fe.composekit.testapp
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import fe.composekit.testapp.page.CataloguePage
+import fe.composekit.testapp.page.DialogPage
 import kotlinx.serialization.Serializable
 
 interface Route {

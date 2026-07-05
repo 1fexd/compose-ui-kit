@@ -1,4 +1,4 @@
-package fe.composekit.testapp
+package fe.composekit.testapp.page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
