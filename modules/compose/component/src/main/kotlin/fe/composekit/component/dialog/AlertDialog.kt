@@ -60,7 +60,6 @@ import fe.material3.compat.value
  * @param properties typically platform specific properties to further configure the dialog.
  * @param content the content of the dialog
  */
-@OptIn(ExperimentalMaterial3ComponentOverrideApi::class)
 @ExperimentalMaterial3Api
 @Composable
 public fun BasicAlertDialog(
@@ -86,7 +85,6 @@ public fun BasicAlertDialog(
  * [BasicAlertDialogOverride] used when no override is specified.
  */
 @OptIn(ExperimentalMaterial3Api::class)
-@ExperimentalMaterial3ComponentOverrideApi
 public object DefaultBasicAlertDialogOverride : BasicAlertDialogOverride {
     @Composable
     override fun BasicAlertDialogOverrideScope.BasicAlertDialog() {
@@ -228,27 +226,6 @@ internal fun AlertDialogImpl(
     }
 }
 
-@Immutable
-public data class DialogSizeOptions(
-    public val minWidth: Dp,
-    public val maxWidth: Dp,
-)
-
-@Immutable
-public data class ButtonSpacingOptions(
-    public val mainAxisSpacing: Dp,
-    public val crossAxisSpacing: Dp,
-)
-
-@Immutable
-public data class DialogPaddingOptions(
-    public val box: PaddingValues,
-    public val icon: PaddingValues,
-    public val title: PaddingValues,
-    public val text: PaddingValues,
-    public val buttons: PaddingValues,
-)
-
 @Composable
 internal fun AlertDialogContent(
     buttons: @Composable () -> Unit,
@@ -344,7 +321,6 @@ internal fun AlertDialogContent(
  * To override this component, implement the member function of this interface, then provide the
  * implementation to [LocalBasicAlertDialogOverride] in the Compose hierarchy.
  */
-@ExperimentalMaterial3ComponentOverrideApi
 public interface BasicAlertDialogOverride {
     /** Behavior function that is called by the [BasicAlertDialog] component. */
     @Composable
@@ -360,7 +336,6 @@ public interface BasicAlertDialogOverride {
  * @param properties typically platform specific properties to further configure the dialog.
  * @param content the content of the dialog
  */
-@ExperimentalMaterial3ComponentOverrideApi
 public class BasicAlertDialogOverrideScope
 internal constructor(
     public val onDismissRequest: () -> Unit,
@@ -370,7 +345,6 @@ internal constructor(
 )
 
 /** CompositionLocal containing the currently-selected [BasicAlertDialogOverride]. */
-@ExperimentalMaterial3ComponentOverrideApi
 public val LocalBasicAlertDialogOverride: ProvidableCompositionLocal<BasicAlertDialogOverride> =
     compositionLocalOf {
         DefaultBasicAlertDialogOverride
