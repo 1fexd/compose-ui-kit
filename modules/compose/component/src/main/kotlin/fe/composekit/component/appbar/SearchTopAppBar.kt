@@ -20,6 +20,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +30,7 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.TextContent
 import fe.composekit.component.BackIconButton
 import fe.composekit.component.list.column.SaneLazyColumnDefaults
+import kotlinx.coroutines.flow.collectLatest
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,6 +45,11 @@ public fun SearchTopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val state = rememberTextFieldState(initialText = query)
+    LaunchedEffect(state) {
+        snapshotFlow { state.text.toString() }.collectLatest {
+            onQueryChange(it)
+        }
+    }
     SearchTopAppBar(
         titleContent = titleContent,
         placeholderContent = placeholderContent,
