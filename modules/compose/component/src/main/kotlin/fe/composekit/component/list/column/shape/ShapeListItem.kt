@@ -33,6 +33,8 @@ public object ShapeListItemDefaults {
     }
 }
 
+
+@Deprecated("Use new overload")
 @Composable
 public fun ShapeListItem(
     modifier: Modifier = CommonDefaults.BaseModifier,
@@ -48,11 +50,44 @@ public fun ShapeListItem(
     leadingContent: OptionalContent = null,
     trailingContent: OptionalContent = null,
 ) {
+    ShapeListItem(
+        baseModifier = modifier,
+        shape = shape,
+        padding = padding,
+        colors = colors,
+        containerHeight = containerHeight,
+        innerPadding = innerPadding,
+        textOptions = textOptions,
+        headlineContent = headlineContent,
+        overlineContent = overlineContent,
+        supportingContent = supportingContent,
+        leadingContent = leadingContent,
+        trailingContent = trailingContent
+    )
+}
+
+@Composable
+public fun ShapeListItem(
+    modifier: Modifier = Modifier,
+    baseModifier: Modifier = CommonDefaults.BaseModifier,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    colors: ListItemColors = ShapeListItemDefaults.colors(),
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
+    headlineContent: TextContent,
+    overlineContent: OptionalTextContent = null,
+    supportingContent: OptionalTextContent = null,
+    leadingContent: OptionalContent = null,
+    trailingContent: OptionalContent = null,
+) {
     CustomListItem(
         modifier = Modifier
             .clip(shape)
-            .then(modifier)
-            .padding(padding),
+            .then(baseModifier)
+            .padding(padding)
+            .then(modifier),
         colors = colors,
         overlineContent = overlineContent?.content,
         headlineContent = headlineContent.content,

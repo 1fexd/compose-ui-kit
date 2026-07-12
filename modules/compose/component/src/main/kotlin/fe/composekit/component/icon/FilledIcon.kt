@@ -17,9 +17,37 @@ import androidx.compose.ui.unit.Dp
 import fe.android.compose.extension.thenIf
 import fe.android.compose.icon.IconPainter
 
+@Deprecated("Use new api")
 @Composable
 public fun FilledIcon(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    iconSize: Dp = IconDefaults.IconSize,
+    iconOffset: IconOffset? = null,
+    containerSize: Dp = IconDefaults.ContainerSize,
+    shape: Shape = IconButtonDefaults.filledShape,
+    colors: IconButtonColors = IconButtonDefaults.filledIconButtonColors(),
+    icon: IconPainter,
+    contentDescription: String?,
+) {
+    FilledIcon(
+        containerModifier = Modifier,
+        iconModifier = modifier,
+        enabled = enabled,
+        iconSize = iconSize,
+        iconOffset = iconOffset,
+        containerSize = containerSize,
+        shape = shape,
+        colors = colors,
+        icon = icon,
+        contentDescription = contentDescription
+    )
+}
+
+@Composable
+public fun FilledIcon(
+    containerModifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     enabled: Boolean = true,
     iconSize: Dp = IconDefaults.IconSize,
     iconOffset: IconOffset? = null,
@@ -36,12 +64,12 @@ public fun FilledIcon(
         color = colors.containerColor(enabled),
         contentColor = colors.contentColor(enabled),
     ) {
-        Box(modifier = Modifier.size(containerSize), contentAlignment = Alignment.Center) {
+        Box(modifier = containerModifier.size(containerSize), contentAlignment = Alignment.Center) {
             Icon(
                 modifier = Modifier
                     .thenIf(iconOffset != null) { iconOffset!!.modifier }
                     .size(iconSize)
-                    .then(modifier),
+                    .then(iconModifier),
                 painter = painter,
                 contentDescription = contentDescription
             )
