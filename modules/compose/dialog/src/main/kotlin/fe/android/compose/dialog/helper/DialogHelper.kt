@@ -2,22 +2,22 @@ package fe.android.compose.dialog.helper
 
 import androidx.compose.runtime.*
 
-data class StateDialogConfig<T>(
+public data class StateDialogConfig<T>(
     val open: (T) -> Unit,
     val close: () -> Unit
 )
 
-data class DialogConfig(
+public data class DialogConfig(
     val open: () -> Unit,
     val close: () -> Unit
 )
 
-typealias OnClose<T> = (T) -> Unit
+public typealias OnClose<T> = (T) -> Unit
 
 
 @Composable
 @Deprecated(message = "Use new Dialog API")
-fun <T, R, S> dialogHelper(
+public fun <T, R, S> dialogHelper(
     fetch: suspend (T) -> R,
     onClose: OnClose<S?> = {},
     awaitFetchBeforeOpen: Boolean = false,
@@ -67,7 +67,7 @@ fun <T, R, S> dialogHelper(
 
 @Composable
 @Deprecated(message = "Use new Dialog API")
-fun <T, S> dialogHelper(
+public fun <T, S> dialogHelper(
     state: T,
     onClose: OnClose<S?> = {},
     notifyCloseNoState: Boolean = false,

@@ -1,5 +1,5 @@
 package fe.composekit.layout.column
 
-interface GroupValueProvider<K : Any> {
-    val key: K
+public interface GroupValueProvider<K : Any> {
+    public val key: K
 }

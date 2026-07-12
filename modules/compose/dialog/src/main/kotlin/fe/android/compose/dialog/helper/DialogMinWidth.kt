@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.R
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -14,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 
 // androidx.compose.material3.AlertDialog
-public val DialogMinWidth = 280.dp
-public val DialogMaxWidth = 560.dp
+public val DialogMinWidth: Dp = 280.dp
+public val DialogMaxWidth: Dp = 560.dp
 
 private inline fun Modifier.runIf(
     condition: Boolean,
@@ -59,7 +61,7 @@ public fun Dialog(
                 )
                 .then(Modifier.semantics {
                     // androidx.compose.material3.AndroidAlertDialog.android.kt
-                    paneTitle = resources.getString(androidx.compose.material3.R.string.m3c_dialog)
+                    paneTitle = resources.getString(R.string.m3c_dialog)
                 }),
             propagateMinConstraints = !dynamicHeight
         ) {
