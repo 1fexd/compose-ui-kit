@@ -10,7 +10,7 @@ import fe.composekit.theme.ThemeConfig
 
 
 @Composable
-fun PreferenceTheme(
+public fun PreferenceTheme(
     preferences: StatePreferenceRepository,
     themePref: Preference.Mapped<Theme, String> = ThemePreferences.theme,
     materialYouPref: Preference.Boolean = ThemePreferences.themeMaterialYou,

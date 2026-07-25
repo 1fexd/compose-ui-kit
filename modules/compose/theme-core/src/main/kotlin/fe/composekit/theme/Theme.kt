@@ -7,12 +7,12 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
 
-sealed class Theme(val name: String) {
-    data object System : Theme("system")
-    data object Light : Theme("light")
-    data object Dark : Theme("dark")
+public sealed class Theme(public val name: String) {
+    public data object System : Theme("system")
+    public data object Light : Theme("light")
+    public data object Dark : Theme("dark")
 
-    fun getColorScheme(
+    public fun getColorScheme(
         context: Context,
         defaultAppColor: AppColorScheme,
         systemDarkTheme: Boolean,

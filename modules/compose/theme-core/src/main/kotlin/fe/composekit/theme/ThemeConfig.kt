@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.compose.material3.ColorScheme
 
-data class ThemeConfig(
+public data class ThemeConfig(
     val theme: Theme,
     val materialYou: Boolean,
     val amoled: Boolean,
 ) {
-    fun getColorScheme(
+    public fun getColorScheme(
         context: Context,
         defaultAppColor: AppColorScheme,
         systemDarkTheme: Boolean,
