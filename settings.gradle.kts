@@ -91,6 +91,7 @@ buildSettings {
             includeProject(":compose-theme-preference", "theme-preference")
             if (!hasJitpackEnv) {
                 includeProject(":compose-test-app", "test-app")
+                includeProject(":compose-theme-test-app", "theme-test-app")
             }
         }
         projects("test") {
