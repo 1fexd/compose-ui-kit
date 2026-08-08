@@ -5,11 +5,16 @@ import android.os.Build
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
+@Immutable
 public sealed class Theme(public val name: String) {
+    @Immutable
     public data object System : Theme("system")
+    @Immutable
     public data object Light : Theme("light")
+    @Immutable
     public data object Dark : Theme("dark")
 
     public fun getColorScheme(

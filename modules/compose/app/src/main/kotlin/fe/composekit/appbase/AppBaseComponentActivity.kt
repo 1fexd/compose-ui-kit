@@ -1,5 +1,6 @@
 package fe.composekit.appbase
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -12,7 +13,12 @@ public open class AppBaseComponentActivity : ComponentActivity() {
         private set
 
     public fun updateEdgeToEdge(status: SystemBarStyle, navigation: SystemBarStyle) {
+//        Log.d("AppBaseComponentActivity", "updateEdgeToEdge(statusBarStyle=$status, navigationBarStyle=$navigation)")
         return enableEdgeToEdge(statusBarStyle = status, navigationBarStyle = navigation)
+    }
+
+    public fun updateEdgeToEdge(holder: SystemBarHolder) {
+        return updateEdgeToEdge(holder.statusBar, holder.navigationBar)
     }
 
     public fun initPadding(): AppBaseComponentActivity {

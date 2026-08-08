@@ -10,5 +10,7 @@ public enum class ContentType {
     BottomGroupItem,
     TextItem,
     CheckboxItem,
-    RadioItem
+    RadioItem,
+    Button,
+    Custom
 }

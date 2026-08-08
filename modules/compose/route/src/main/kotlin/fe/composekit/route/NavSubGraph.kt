@@ -6,11 +6,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navigation
+import kotlinx.serialization.Serializable
 import kotlin.reflect.KType
 import kotlin.reflect.full.starProjectedType
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+@Serializable
 public interface NavSubGraph<out R : Route> {
     public val startDestination: R
     public val graph: NavGraphBuilder.(NavHostController) -> Unit

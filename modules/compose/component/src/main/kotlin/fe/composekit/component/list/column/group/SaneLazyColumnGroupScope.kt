@@ -3,6 +3,7 @@ package fe.composekit.component.list.column.group
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Shape
 import fe.composekit.component.ContentType
@@ -11,10 +12,9 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.GroupValueProvider
 import fe.composekit.layout.column.SaneLazyColumnGroupScope
 import fe.composekit.layout.column.SaneLazyListScope
-import kotlin.collections.iterator
 
 
-@Stable
+@Immutable
 public data class GroupItem(
     val contentType: ContentType,
     val padding: PaddingValues = PaddingValues(),
@@ -128,7 +128,7 @@ public data class SaneLazyColumnGroupScopeImpl(
 
         for (value in values) {
             val groupItem = currentItem()
-            item(key = key(value), contentType = groupItem) {
+            item(key = key(value), contentType = groupItem.contentType) {
                 content(value, groupItem.padding, groupItem.shape)
             }
 

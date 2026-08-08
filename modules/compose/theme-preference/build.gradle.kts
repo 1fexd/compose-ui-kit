@@ -7,4 +7,5 @@ dependencies {
     implementation(project(":compose-theme-core"))
     implementation(project(":preference-core"))
     implementation(project(":preference-compose-core"))
+    implementation(project(":preference-compose-core2"))
 }

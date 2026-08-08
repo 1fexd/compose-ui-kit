@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":core"))
     implementation(project(":compose-core"))
     implementation(project(":preference-core"))
     implementation(project(":preference-compose-core"))
