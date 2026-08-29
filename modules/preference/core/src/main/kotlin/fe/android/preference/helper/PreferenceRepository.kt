@@ -9,7 +9,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
-import kotlin.getValue
 
 public typealias PreferenceEditAction = SharedPreferences.Editor.() -> Unit
 
@@ -41,11 +40,25 @@ public abstract class PreferenceRepository(
         withEditor { Scope(this).apply(action) }
     }
 
+    public suspend fun suspendingEdit(action: Scope.() -> Unit): Boolean {
+        return withSuspendingEditor { Scope(this).apply(action) }
+    }
+
     override fun withEditor(action: PreferenceEditAction) {
         val editor = preferences.edit()
         action(editor)
         editor.apply()
         Log.d("PreferenceRepository", "apply()")
+    }
+
+    public suspend fun withSuspendingEditor(action: PreferenceEditAction): Boolean {
+        return withContext(Dispatchers.IO) {
+            val editor = preferences.edit()
+            action(editor)
+            val success = editor.commit()
+            Log.d("PreferenceRepository", "commit(): $success")
+            success
+        }
     }
 
     public fun hasStoredValue(preference: Preference<*, *>): Boolean {
