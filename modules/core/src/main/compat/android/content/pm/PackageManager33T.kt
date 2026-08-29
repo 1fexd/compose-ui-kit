@@ -2,13 +2,13 @@ package android.content.pm
 
 import android.content.ComponentName
 import android.content.Intent
+import fe.composekit.core.AndroidVersion
 import fe.composekit.flag.ApplicationInfoFlags
 import fe.composekit.flag.ComponentEnabledFlags
 import fe.composekit.flag.ComponentEnabledStateFlags
 import fe.composekit.flag.ComponentInfoFlags
 import fe.composekit.flag.PackageInfoFlags
 import fe.composekit.flag.ResolveInfoFlags
-import fe.composekit.core.AndroidVersion
 
 
 public fun PackageManager.resolveActivityCompat(
@@ -40,10 +40,19 @@ private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Lo
     }
 }
 
+
+@Deprecated("Use the PackageInfoFlags overload instead")
 public fun PackageManager.getInstalledPackagesCompat(flags: Long = 0): List<PackageInfo> {
     return when {
         AndroidVersion.isAtLeastApi33T() -> getInstalledPackages(PackageManager.PackageInfoFlags.of(flags))
         else -> getInstalledPackages(flags.toInt())
+    }
+}
+
+public fun PackageManager.getInstalledPackagesCompat(flags: PackageInfoFlags = PackageInfoFlags.EMPTY): List<PackageInfo> {
+    return when {
+        AndroidVersion.isAtLeastApi33T() -> getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.value))
+        else -> getInstalledPackages(flags.value.toInt())
     }
 }
 
