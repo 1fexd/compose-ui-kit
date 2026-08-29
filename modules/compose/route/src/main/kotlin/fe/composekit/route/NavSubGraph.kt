@@ -13,8 +13,9 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @Serializable
-public interface NavSubGraph<out R : Route> {
-    public val startDestination: R
+public interface NavSubGraph<out T : Route, out S : Route> {
+    public val subGraphRoute: T
+    public val startDestination: S
     public val graph: NavGraphBuilder.(NavHostController) -> Unit
 }
 
@@ -22,11 +23,11 @@ public interface Nav {
     public val graph: NavGraphBuilder.(NavHostController) -> Unit
 }
 
-public inline fun <R : Route, reified G : NavSubGraph<R>> NavGraphBuilder.attachSubGraph(
-    page: G,
+public inline fun <reified T : Route, S : Route> NavGraphBuilder.attachSubGraph(
+    page: NavSubGraph<T, S>,
     navController: NavHostController,
 ) {
-    navigation<G>(
+    navigation<T>(
         startDestination = page.startDestination,
         typeMap = NavTypes.Types
     ) {
@@ -35,7 +36,10 @@ public inline fun <R : Route, reified G : NavSubGraph<R>> NavGraphBuilder.attach
 }
 
 
-public inline fun <reified N : Nav> NavGraphBuilder.attachNav(nav: N, navController: NavHostController) {
+public inline fun <reified N : Nav> NavGraphBuilder.attachNav(
+    nav: N,
+    navController: NavHostController
+) {
     nav.graph(this, navController)
 }
 
